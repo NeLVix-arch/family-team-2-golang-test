@@ -1,8 +1,21 @@
+BINARY = service
+SERVICE = family_service
+PORT = 80
+
 build:
-	docker build -t family-team .
+	CGO_ENABLED=0 GOOS=linux go build -o $(BINARY) ./src/main.go 
 
 run:
-	docker run -p 80:80 family-team
+	./$(BINARY)
 
-test:
-	go test -v ./...
+clean:
+	rm -f $(BINARY)
+
+docker-build:
+	docker build -t $(SERVICE) .
+
+docker-run:
+	docker run -p $(PORT):$(PORT) $(SERVICE)
+
+docker-push:
+	docker push $(SERVICE)

@@ -1,7 +1,8 @@
 FROM scratch
 
-COPY main /
+COPY service /service
+COPY test.zip /test.zip
 
 EXPOSE 80
 
-CMD ["/main"]
+CMD ["/service"]
