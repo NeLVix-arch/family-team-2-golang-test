@@ -11,7 +11,8 @@ run:
 clean:
 	rm -f $(BINARY)
 
-
+test:
+	go test -v ./...
 
 docker-build:
 	docker build -t $(SERVICE) .
