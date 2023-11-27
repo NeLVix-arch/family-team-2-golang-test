@@ -1,7 +1,7 @@
 FROM scratch
 
-COPY server /
+COPY main /
 
 EXPOSE 80
 
-CMD ["/server"]
+CMD ["/main"]
