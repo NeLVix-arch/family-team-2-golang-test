@@ -14,7 +14,7 @@ require (
 )
 
 require (
-	github.com/go-chi/cors v1.2.1 // indirect
+	github.com/go-chi/cors v1.2.1
 	github.com/stretchr/testify v1.8.4
 	go.uber.org/multierr v1.10.0 // indirect
 )
