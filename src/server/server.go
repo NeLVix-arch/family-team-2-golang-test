@@ -26,10 +26,9 @@ func NewServer(logger *zap.Logger, files []string, port string) *Server {
 }
 
 // Run creates and runs the HTTP server with the Chi router
-func (s *Server) Run() {
+func (s *Server) Build() *http.Server {
 	// create Chi router
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins: []string{"http://localhost"},
@@ -40,9 +39,8 @@ func (s *Server) Run() {
 	// define handler for the root path
 	r.Get("/", s.RootHandler)
 
-	// start the HTTP server
-	s.Logger.Info("starting HTTP server", zap.String("port", s.Port))
-	if err := http.ListenAndServe(":"+s.Port, r); err != nil {
-		s.Logger.Fatal("failed to start HTTP server", zap.Error(err))
+	return &http.Server{
+		Addr:    ":" + s.Port,
+		Handler: r,
 	}
 }
